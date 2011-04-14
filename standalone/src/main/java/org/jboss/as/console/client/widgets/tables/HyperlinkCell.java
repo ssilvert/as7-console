@@ -28,6 +28,11 @@ import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 
+/**
+ * <b>CSS Style Rules</b> <br>
+ *
+ *   .gwt-Hyperlink { }
+ */
 public class HyperlinkCell extends AbstractCell<String> {
 
   private final SafeHtml html;
