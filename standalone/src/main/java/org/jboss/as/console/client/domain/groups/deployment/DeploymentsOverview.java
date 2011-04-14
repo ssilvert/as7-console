@@ -20,6 +20,8 @@ package org.jboss.as.console.client.domain.groups.deployment;
 
 import com.google.gwt.cell.client.ActionCell;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.cellview.client.TextColumn;
 import com.google.gwt.user.client.ui.HorizontalPanel;
@@ -41,6 +43,8 @@ import org.jboss.as.console.client.widgets.tables.DefaultCellTable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.jboss.as.console.client.widgets.tables.HyperlinkCell;
 import org.jboss.as.console.client.widgets.tables.OptionCell;
 
 /**
@@ -119,10 +123,11 @@ public class DeploymentsOverview extends SuspendableViewImpl implements Deployme
     deploymentTable.addColumn(dplRuntimeColumn, "Runtime Name");
 
     for (int i = 0; i < action.length; i++) {
-      OptionCell optionCell = new OptionCell(action[i], new ActionCell.Delegate<String>() {
+        final String actionName = action[i];
+        HyperlinkCell optionCell = new HyperlinkCell(actionName, new ActionCell.Delegate<String>() {
             @Override
             public void execute(String rowNum) {
-              System.out.println("Called for rownum =" + rowNum);
+                System.out.println(actionName+" row "+ rowNum);
             }
         });
 
