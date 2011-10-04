@@ -32,6 +32,10 @@ import org.jboss.as.console.client.shared.deployment.DeploymentReference;
 import org.jboss.as.console.client.shared.general.model.Interface;
 import org.jboss.as.console.client.shared.general.model.SocketBinding;
 import org.jboss.as.console.client.shared.jvm.Jvm;
+import org.jboss.as.console.client.shared.jvm.model.HeapMetric;
+import org.jboss.as.console.client.shared.jvm.model.OSMetric;
+import org.jboss.as.console.client.shared.jvm.model.RuntimeMetric;
+import org.jboss.as.console.client.shared.jvm.model.ThreadMetric;
 import org.jboss.as.console.client.shared.model.DeploymentRecord;
 import org.jboss.as.console.client.shared.model.SubsystemRecord;
 import org.jboss.as.console.client.shared.properties.PropertyRecord;
@@ -40,6 +44,7 @@ import org.jboss.as.console.client.shared.subsys.ejb.pool.model.EJBPool;
 import org.jboss.as.console.client.shared.subsys.ejb.service.model.TimerService;
 import org.jboss.as.console.client.shared.subsys.ejb.session.model.SessionBeans;
 import org.jboss.as.console.client.shared.subsys.deploymentscanner.model.DeploymentScanner;
+import org.jboss.as.console.client.shared.subsys.infinispan.model.CacheContainer;
 import org.jboss.as.console.client.shared.subsys.jca.model.DataSource;
 import org.jboss.as.console.client.shared.subsys.jca.model.JDBCDriver;
 import org.jboss.as.console.client.shared.subsys.jca.model.PoolConfig;
@@ -270,5 +275,31 @@ public class BeanFactoryImpl implements BeanFactory {
     public AutoBean<DeploymentScanner> deploymentScanner() {
         throw new RuntimeException("not implemented");
     }
+
+    @Override
+    public AutoBean<CacheContainer> cacheContainer() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public AutoBean<HeapMetric> heapMetric() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public AutoBean<OSMetric> osmetric() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public AutoBean<RuntimeMetric> runtime() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public AutoBean<ThreadMetric> threadMetric() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+    
 }
 

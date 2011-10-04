@@ -38,6 +38,8 @@ public class DataSourceImpl implements DataSource {
     String poolname;
     String version;
     int major, minor;
+    boolean ccm;
+    boolean jta;
 
     @Override
     public String getName() {
@@ -148,4 +150,25 @@ public class DataSourceImpl implements DataSource {
     public void setMinorVersion(int minor) {
         this.minor = minor;
     }
+
+    @Override
+    public boolean isCcm() {
+        return ccm;
+    }
+
+    @Override
+    public boolean isJta() {
+        return jta;
+    }
+
+    @Override
+    public void setCcm(boolean ccm) {
+        this.ccm = ccm;
+    }
+
+    @Override
+    public void setJta(boolean jta) {
+        this.jta = jta;
+    }
+    
 }
