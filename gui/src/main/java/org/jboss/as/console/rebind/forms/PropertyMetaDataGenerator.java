@@ -141,6 +141,7 @@ public class PropertyMetaDataGenerator extends Generator{
 
     private void generateFields(SourceWriter sourceWriter) {
         sourceWriter.println("private Map<Class<?>, List<PropertyBinding>> registry = new HashMap<Class<?>,List<PropertyBinding>>();");
+        sourceWriter.println("private Map<String, Class<?>> stringToClass = new HashMap<String, Class<?>>();");
         sourceWriter.println("private Map<Class<?>, AddressBinding> addressing= new HashMap<Class<?>, AddressBinding>();");
         sourceWriter.println("private Map<Class<?>, Mutator> mutators = new HashMap<Class<?>, Mutator>();");
         sourceWriter.println("private Map<Class<?>, EntityFactory> factories = new HashMap<Class<?>, EntityFactory>();");
@@ -254,7 +255,10 @@ public class PropertyMetaDataGenerator extends Generator{
                                             "return beanFactory."+method.getName()+"().as();\n"+
                                         "}\n"+
                                 "});\n");
-
+                        // -----------------------------
+                        // Class from String
+                        sourceWriter.println("");
+                        sourceWriter.println("stringToClass.put(\"" + beanTypeClass.getName() + "\", " + beanTypeClass.getName() + ".class);" );
 
                         sourceWriter.println("");
                         sourceWriter.println("");
@@ -414,6 +418,12 @@ public class PropertyMetaDataGenerator extends Generator{
         sourceWriter.println("public List<PropertyBinding> getBindingsForType(Class<?> type) { ");
         sourceWriter.indent();
         sourceWriter.println("return registry.get(type);");
+        sourceWriter.outdent();
+        sourceWriter.println("}");
+        
+        sourceWriter.println("public Class<?> getClassFromString(String type) { ");
+        sourceWriter.indent();
+        sourceWriter.println("return stringToClass.get(type);");
         sourceWriter.outdent();
         sourceWriter.println("}");
 

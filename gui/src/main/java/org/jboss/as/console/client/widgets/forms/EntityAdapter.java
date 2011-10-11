@@ -1,5 +1,7 @@
 package org.jboss.as.console.client.widgets.forms;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
 import org.jboss.as.console.client.shared.properties.PropertyRecord;
 import org.jboss.ballroom.client.widgets.forms.FormItem;
 import org.jboss.dmr.client.ModelNode;
@@ -186,6 +188,9 @@ public class EntityAdapter<T> {
                         value = new LinkedList();
                     }
                 }
+                else if (hasSubAdapter(propBinding)) {
+                    value = getSubAdapter(propBinding).fromDMR(dmr);
+                }
 
                 // invoke the mutator
                 mutator.setValue(protoType, propBinding.getJavaName(), value);
@@ -205,6 +210,14 @@ public class EntityAdapter<T> {
         }
 
         return protoType;
+    }
+    
+    private boolean hasSubAdapter(PropertyBinding propBinding) {
+        return metaData.getClassFromString(propBinding.getJavaTypeName()) != null;
+    }
+    
+    private EntityAdapter getSubAdapter(PropertyBinding propBinding) {
+        return new EntityAdapter(metaData.getClassFromString(propBinding.getJavaTypeName()), metaData);
     }
 
     /**
@@ -266,7 +279,15 @@ public class EntityAdapter<T> {
                         operation.get(property.getDetypedName()).set(modelType, property.getEntityAdapterForList().fromEntityPropertyList((List)value));
                     } else if (modelType == ModelType.LIST) {
                         operation.get(property.getDetypedName()).set(modelType, property.getEntityAdapterForList().fromEntityList((List)value));
-                    } else {
+                    } else if (hasSubAdapter(property)) {
+                        ModelNode subEntity = getSubAdapter(property).fromEntity(entity);
+                        for (ModelNode attribute : subEntity.asList()) {
+                            operation.set(attribute);
+                        }
+                    } else if (modelType == ModelType.UNDEFINED) {
+                        throw new RuntimeException("Failed to resolve ModelType for '" + property.getJavaTypeName() +"'");
+                    }
+                    else {
                         operation.get(property.getDetypedName()).set(modelType, value);
                     }
                 } catch (RuntimeException e) {
@@ -295,7 +316,7 @@ public class EntityAdapter<T> {
         else if("java.util.List".equals(javaTypeName)) {
             type = ModelType.LIST;
         } else {
-            throw new RuntimeException("Failed to resolve ModelType for '"+ javaTypeName+"'");
+            type = ModelType.UNDEFINED;
         }
         
         return type;
@@ -401,6 +422,16 @@ public class EntityAdapter<T> {
                     } else {
                         step.get(VALUE).set(fromEntityList((List)value));
                     }
+                }
+                else if (hasSubAdapter(binding)) {
+                    Map<String, Object> subChanges = new HashMap<String, Object>();
+                    Class<?> subTypeClass = metaData.getClassFromString(binding.getJavaTypeName());
+                    Mutator mutator = metaData.getMutator(subTypeClass);
+                    for (PropertyBinding propBinding : metaData.getBindingsForType(subTypeClass)) {
+                        String javaName = propBinding.getJavaName();
+                        subChanges.put(javaName, mutator.getValue(value, javaName));
+                    }
+                    step.get(VALUE).set(getSubAdapter(binding).fromChangeset(subChanges, address));
                 }
                 else
                 {
