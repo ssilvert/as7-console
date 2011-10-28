@@ -144,7 +144,8 @@ public class LoggingInfo {
     }
     
     private LoggerConfig makeLogger(ModelNode node, String name) {
-        LoggerConfig model = factory.loggerConfig().as();
+        return null;
+/*        LoggerConfig model = factory.loggerConfig().as();
         model.setName(name);
         model.setLevel(node.get("level").asString());
 
@@ -159,7 +160,7 @@ public class LoggingInfo {
 
         model.setHandlers(handlers);
 
-        return model;
+        return model; */
     }
 
     /**
@@ -241,7 +242,8 @@ public class LoggingInfo {
                         }
                         
                         private LoggingHandler makeHandler(ModelNode node, String name) {
-                            LoggingHandler model = factory.loggingHandler().as();
+                            return null;
+           /*                 LoggingHandler model = factory.loggingHandler().as();
                             model.setName(name);
                             model.setType(handlerType);
                             model.setLevel(node.get("level").asString());
@@ -311,7 +313,7 @@ public class LoggingInfo {
                             }
                             model.setProperties(properties);
                             
-                            return model;
+                            return model; */
                         }
                         
                     });
