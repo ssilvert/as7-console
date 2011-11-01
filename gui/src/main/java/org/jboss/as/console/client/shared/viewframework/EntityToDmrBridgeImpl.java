@@ -44,6 +44,7 @@ import org.jboss.as.console.client.widgets.forms.PropertyBinding;
 import org.jboss.as.console.client.widgets.forms.ApplicationMetaData;
 import org.jboss.ballroom.client.widgets.forms.FormAdapter;
 import org.jboss.dmr.client.ModelNode;
+import org.jboss.dmr.client.ModelType;
 
 /**
  * This class knows how to do DMR operations and refresh the view.
