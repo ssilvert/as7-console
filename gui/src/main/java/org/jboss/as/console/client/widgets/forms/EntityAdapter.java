@@ -339,8 +339,7 @@ public class EntityAdapter<T> {
             /**
              * KEYS
              */
-           // UNCOMMENT THIS AFTER JAMES MAKES HIS FIX TO LOGGING
-           // if(property.isKey()) continue;
+      //      if(property.isKey()) continue;
 
             Object propertyValue = mutator.getValue(entity, property.getJavaName());
 
@@ -487,7 +486,6 @@ public class EntityAdapter<T> {
 
         for(PropertyBinding binding : propertyBindings)
         {
-            
             Object value = changeSet.get(binding.getJavaName());
             if(value!=null)
             {
