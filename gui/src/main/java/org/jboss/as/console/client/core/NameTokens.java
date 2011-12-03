@@ -28,6 +28,7 @@ public class NameTokens {
     public static final String mainLayout = "main";
 
     public static final String BoundedQueueThreadPoolPresenter = "threads";
+    public static final String CacheContainerPresenter = "cache-container";
     public static final String DataSourcePresenter = "datasources";
     public static final String DebugToolsPresenter = "debug-tools";
     public static final String EJB3Presenter = "ejb3";
@@ -39,6 +40,7 @@ public class NameTokens {
     public static final String JacOrbPresenter = "jacorb";
     public static final String JMSPresenter = "jms";
     public static final String JndiPresenter = "naming";
+    public static final String LocalCachePresenter = "local-cache";
     public static final String Logger = "logging";
     public static final String LogHandler = "log-handler";
     public static final String ScannerPresenter = "deployment-scanner";

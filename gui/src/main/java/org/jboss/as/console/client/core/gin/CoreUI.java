@@ -209,7 +209,11 @@ public interface CoreUI extends Ginjector {
     AsyncProvider<ScannerPresenter> getScannerPresenter();
     AsyncProvider<OSGiConfigurationPresenter> getOSGiConfigurationPresenter();
     AsyncProvider<OSGiRuntimePresenter> getOSGiRuntimePresenter();
+    
+    // Infinispan
     AsyncProvider<CacheContainerPresenter> getCacheContainerPresenter();
+    AsyncProvider<LocalCachePresenter> getLocalCachePresenter();
+    
     AsyncProvider<SocketBindingPresenter> getSocketBindingPresenter();
 
     AsyncProvider<ThreadsPresenter> getBoundedQueueThreadPoolPresenter();

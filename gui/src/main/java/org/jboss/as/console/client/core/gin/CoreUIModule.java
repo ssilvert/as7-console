@@ -396,10 +396,15 @@ public class CoreUIModule extends AbstractPresenterModule {
                 OSGiRuntimeView.class,
                 OSGiRuntimePresenter.MyProxy.class);
 
+        // Infinispan
         bindPresenter(CacheContainerPresenter.class,
                 CacheContainerPresenter.MyView.class,
                 CacheContainerView.class,
                 CacheContainerPresenter.MyProxy.class);
+        bindPresenter(LocalCachePresenter.class,
+                LocalCachePresenter.MyView.class,
+                LocalCacheView.class,
+                LocalCachePresenter.MyProxy.class);
 
         bindPresenter(SocketBindingPresenter.class,
                 SocketBindingPresenter.MyView.class,
